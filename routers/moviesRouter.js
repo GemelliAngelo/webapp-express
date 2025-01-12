@@ -9,6 +9,7 @@ const moviesController = require("../controllers/moviescontroller");
 
 // # ROUTER METHOD
 router.get("/", moviesController.index);
+router.get("/:id", moviesController.show);
 
 // # EXPORTS
 module.exports = router;
