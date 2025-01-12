@@ -4,11 +4,11 @@ const express = require("express");
 // # ROUTER CONFIG
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.json({
-    status: "ok",
-  });
-});
+// # CONTROLLER INPORT
+const moviesController = require("../controllers/moviescontroller");
+
+// # ROUTER METHOD
+router.get("/", moviesController.index);
 
 // # EXPORTS
 module.exports = router;
