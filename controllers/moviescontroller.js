@@ -43,8 +43,6 @@ function show(req, res) {
       return res.status(400).json({ error: err });
     }
 
-    let movie = movieResults[0];
-
     const sqlReviews = `SELECT 
       reviews.name, 
       reviews.vote, 
@@ -64,8 +62,13 @@ function show(req, res) {
       }
 
       // * output
-      movie.reviews = reviewsResults;
-
+      const movie = {
+        ...movieResults[0],
+        cover: `${APP_HOST}:${APP_PORT}/img/${movieResults[0].title
+          .toLowerCase()
+          .replace(" ", "_")}.jpg`,
+        reviews: reviewsResults,
+      };
       res.json(movie);
     });
   });
