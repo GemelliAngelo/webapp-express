@@ -9,6 +9,9 @@ const notFound = require("./middlewares/notFound");
 // # JSON PARSER FOR BODY REQUEST
 app.use(express.json());
 
+// # PUBLIC STATIC ASSETS
+app.use(express.static("public"));
+
 const { APP_HOST, APP_PORT } = process.env;
 
 // # HOMEPAGE
