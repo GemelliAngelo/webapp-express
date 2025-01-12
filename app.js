@@ -6,6 +6,9 @@ const app = express();
 const errorsHandler = require("./middlewares/errorHandler");
 const notFound = require("./middlewares/notFound");
 
+// # ROUTER INPORT
+const moviesRouter = require("./routers/moviesRouter");
+
 // # JSON PARSER FOR BODY REQUEST
 app.use(express.json());
 
@@ -14,9 +17,12 @@ app.use(express.static("public"));
 
 const { APP_HOST, APP_PORT } = process.env;
 
+// # EXPRESS ROUTING
+app.use("/movies", moviesRouter);
+
 // # HOMEPAGE
 app.get("/", (req, res) => {
-  res.send(`<h1>SERVER DEL MIO BLOG</h1>`);
+  res.send(`<h1>APP CONNESSA</h1>`);
 });
 
 // # SERVER LISTENING
