@@ -1,4 +1,5 @@
 const connection = require("../db/movies");
+const { APP_HOST, APP_PORT } = process.env;
 
 // # INDEX
 function index(req, res) {
@@ -15,8 +16,17 @@ function index(req, res) {
       return res.status(404).json({ error: "Not Found" });
     }
 
+    const movies = results.map((movie) => {
+      return {
+        ...movie,
+        cover: `${APP_HOST}:${APP_PORT}/img/${movie.title
+          .toLowerCase()
+          .replace(" ", "_")}.jpg`,
+      };
+    });
+
     // output
-    res.json(results);
+    res.json(movies);
   });
 }
 
@@ -35,8 +45,16 @@ function show(req, res) {
 
     let movie = movieResults[0];
 
-    const sqlReviews =
-      "SELECT `reviews`.`name`, `reviews`.`vote`, `reviews`.`text`, `reviews`.`created_at`,`reviews`.`updated_at` FROM `movies` INNER JOIN `reviews` ON `reviews`.`movie_id`=`movies`.`id` WHERE `movies`.`id`=?";
+    const sqlReviews = `SELECT 
+      reviews.name, 
+      reviews.vote, 
+      reviews.text, 
+      reviews.created_at,
+      reviews.updated_at 
+      FROM movies 
+      INNER JOIN reviews 
+      ON reviews.movie_id=movies.id 
+      WHERE movies.id=?`;
 
     connection.query(sqlReviews, [id], (err, reviewsResults) => {
       // * managing error
