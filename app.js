@@ -8,3 +8,15 @@ const notFound = require("./middlewares/notFound");
 
 // # JSON PARSER FOR BODY REQUEST
 app.use(express.json());
+
+const { APP_HOST, APP_PORT } = process.env;
+
+// # HOMEPAGE
+app.get("/", (req, res) => {
+  res.send(`<h1>SERVER DEL MIO BLOG</h1>`);
+});
+
+// # SERVER LISTENING
+app.listen(APP_PORT, () => {
+  console.log(`App listening at ${APP_HOST}:${APP_PORT}`);
+});
