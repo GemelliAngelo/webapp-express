@@ -25,6 +25,10 @@ app.get("/", (req, res) => {
   res.send(`<h1>APP CONNESSA</h1>`);
 });
 
+// # HANDLING ERRORS
+app.use(errorsHandler);
+app.use(notFound);
+
 // # SERVER LISTENING
 app.listen(APP_PORT, () => {
   console.log(`App listening at ${APP_HOST}:${APP_PORT}`);
