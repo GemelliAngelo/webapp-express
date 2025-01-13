@@ -3,8 +3,11 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 
+// # REGISTERING CORS
+const { APP_HOST, APP_PORT, APP_FRONTEND_URL } = process.env;
+
 const corsOptions = {
-  origin: process.env.APP_FRONTEND_URL,
+  origin: APP_FRONTEND_URL,
   optionSuccessStatus: 200,
 };
 
@@ -21,12 +24,10 @@ app.use(express.json());
 // # PUBLIC STATIC ASSETS
 app.use(express.static("public"));
 
-const { APP_HOST, APP_PORT } = process.env;
+app.use(cors(corsOptions));
 
 // # EXPRESS ROUTING
 app.use("/movies", moviesRouter);
-
-app.use(cors(corsOptions));
 
 // # HOMEPAGE
 app.get("/", (req, res) => {
