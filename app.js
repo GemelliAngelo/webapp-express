@@ -1,6 +1,12 @@
 // # INIT EXPRESS
 const express = require("express");
+const cors = require("cors");
 const app = express();
+
+const corsOptions = {
+  origin: "http://localhost:5173",
+  optionSuccessStatus: 200,
+};
 
 // # MIDDLEWARES IMPORTS
 const errorsHandler = require("./middlewares/errorHandler");
@@ -19,6 +25,8 @@ const { APP_HOST, APP_PORT } = process.env;
 
 // # EXPRESS ROUTING
 app.use("/movies", moviesRouter);
+
+app.use(cors(corsOptions));
 
 // # HOMEPAGE
 app.get("/", (req, res) => {
