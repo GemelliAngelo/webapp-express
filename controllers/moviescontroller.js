@@ -44,6 +44,7 @@ function show(req, res) {
     }
 
     const sqlReviews = `SELECT 
+      reviews.id,
       reviews.name, 
       reviews.vote, 
       reviews.text, 
