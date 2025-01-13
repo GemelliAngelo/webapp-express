@@ -19,7 +19,7 @@ function index(req, res) {
     const movies = results.map((movie) => {
       return {
         ...movie,
-        cover: `${APP_HOST}:${APP_PORT}/img/${movie.title
+        image: `${APP_HOST}:${APP_PORT}/img/${movie.title
           .toLowerCase()
           .replace(" ", "_")}.jpg`,
       };
@@ -65,7 +65,7 @@ function show(req, res) {
       // * output
       const movie = {
         ...movieResults[0],
-        cover: `${APP_HOST}:${APP_PORT}/img/${movieResults[0].title
+        image: `${APP_HOST}:${APP_PORT}/img/${movieResults[0].title
           .toLowerCase()
           .replace(" ", "_")}.jpg`,
         reviews: reviewsResults,
